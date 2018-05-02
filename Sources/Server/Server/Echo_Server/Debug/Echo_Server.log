@@ -1,0 +1,5 @@
+﻿  ThreadedTCPEchoServer.cpp
+c:\users\dienv\desktop\ltm_tungbt_20172\sources\server\server\echo_server\threadedtcpechoserver.cpp(56): warning C4244: '=': conversion from 'unsigned __int64' to 'ULONG', possible loss of data
+c:\users\dienv\desktop\ltm_tungbt_20172\sources\server\server\echo_server\threadedtcpechoserver.cpp(78): warning C4101: 'i': unreferenced local variable
+  Echo_Server.vcxproj -> C:\Users\dienv\Desktop\LTM_TUNGBT_20172\Sources\Server\Server\Debug\Threaded TCP Echo Server.exe
+  Echo_Server.vcxproj -> C:\Users\dienv\Desktop\LTM_TUNGBT_20172\Sources\Server\Server\Debug\Threaded TCP Echo Server.pdb (Full PDB)
