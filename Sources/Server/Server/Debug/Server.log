@@ -1,4 +1,3 @@
 ﻿  Source.cpp
-c:\users\dienv\desktop\ltm_tungbt_20172\sources\server\server\source.cpp(47): warning C4101: 'idx': unreferenced local variable
-  Server.vcxproj -> C:\Users\dienv\Desktop\LTM_TUNGBT_20172\Sources\Server\Debug\Server.exe
-  Server.vcxproj -> C:\Users\dienv\Desktop\LTM_TUNGBT_20172\Sources\Server\Debug\Server.pdb (Full PDB)
+g:\code\ltm\ltm_tungbt_20172\sources\server\server\source.cpp(47): warning C4101: 'idx': unreferenced local variable
+  Server.vcxproj -> G:\Code\LTM\LTM_TUNGBT_20172\Sources\Server\Debug\Server.exe
