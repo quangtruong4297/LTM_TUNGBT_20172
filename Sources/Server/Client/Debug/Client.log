@@ -1,0 +1,4 @@
+﻿  Client.cpp
+c:\users\dienv\desktop\ltm_tungbt_20172\sources\server\client\client.cpp(112): warning C4715: 'isError': not all control paths return a value
+  Client.vcxproj -> C:\Users\dienv\Desktop\LTM_TUNGBT_20172\Sources\Server\Debug\Client.exe
+  Client.vcxproj -> C:\Users\dienv\Desktop\LTM_TUNGBT_20172\Sources\Server\Debug\Client.pdb (Full PDB)

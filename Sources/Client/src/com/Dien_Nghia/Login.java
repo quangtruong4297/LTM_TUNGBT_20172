@@ -27,7 +27,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-public class LogIn extends JFrame {
+class LogIn extends JFrame {
 
 	private JPanel pLogin;
 	private JPasswordField passwordField;

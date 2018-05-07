@@ -1,12 +1,27 @@
 #pragma once
 #include <winsock2.h>
+
+#define USER 1
+#define PASS 2
+#define LOUT 3
+#define ADDP 4
+#define LIST 5
+#define LIFR 6
+#define TAGF 7
+#define NOTI 8
+
+#define DATA_BUFSIZE 2024
+#define RECEIVE 0
+#define SEND 1
+
 #define NUMB_USERS_MAX 255
 #define NUMB_SESS_MAX 255
+#define BUFF_SIZE_RESULT 3
 #define FILE_NAME "account.txt"
-
 int userIndex = 0;	//number of user have in database
 int sessIndex = -1;	//number of session
 int index;
+
 
 //sessions are connecting
 struct session {
@@ -34,9 +49,11 @@ struct currentUser {
 
 //construct message Receive
 struct message {
-	char msgType[5];
-	char data[255];
+	int msgType;
+	int length;
+	char data[DATA_BUFSIZE];
 };
+
 
 
 //if this client was connected before then return 1 else return 0
@@ -104,17 +121,8 @@ void updateUser(int idx) {
 
 //get message type
 //return 1-user, 2-pass, 3-logout else return 0
-int checkMsgType(char msgType[]) {
-	if (strcmp(msgType, "user") == 0) {
-		return 1;
-	}
-	else if (strcmp(msgType, "pass") == 0) {
-		return 2;
-	}
-	else if (strcmp(msgType, "lgo") == 0) {
-		return 3;
-	}
-	return 0;
+int checkMsgType(int msgType) {
+	return msgType;
 }
 
 // change status of current session
@@ -243,7 +251,6 @@ int processUserID(SOCKET connSock, int idx, char *data, char *out) {
 
 	sess[idx].connSock = connSock;
 
-	changeStatusOfSession(idx, 0);	//step UNIDENTI
 
 	if (checkAvailUserID(data) == 1)//have user in database
 	{
@@ -351,19 +358,24 @@ int  process(SOCKET connSock, int idx, char buff[], char *out) {
 
 	extractInformation(buff, &msg);
 
-	if (checkMsgType(msg.msgType) == 1) {	//msgType is user
-											//process userID
-		processUserID(connSock, idx, msg.data, out);
-	}//end of check user ID
-
-	else if (checkMsgType(msg.msgType) == 2)	//msgType is password
-	{
-		processPass(connSock, idx, msg.data, out);
-	} //end of check password
-
-	else if (checkMsgType(msg.msgType) == 3)//message type is logout
-	{
-		processLogOut(connSock, idx, msg.data, out);
+	msg.data[msg.length] = '\0';
+	printf(" type %d length %d data %s", msg.msgType, msg.length, msg.data);
+	
+	if (sess[idx].sessionStatus == 0) {
+		if (msg.msgType == 1)
+			processUserID(connSock, idx, msg.data, out);
+		else memcpy(out, "-10", 3);
+	}
+	else if (sess[idx].sessionStatus == 1) {
+		if (msg.msgType == 2)
+			processPass(connSock, idx, msg.data, out);
+		
+		else memcpy(out, "-10", 3);
+	} 
+	else if (sess[idx].sessionStatus == 2) {
+		if (msg.msgType == 3)
+			processLogOut(connSock, idx, msg.data, out);
+		else memcpy(out, "-10", 3);
 	}
 	else //message type can not identified
 	{
@@ -381,4 +393,3 @@ int addNewSession() {
 	sessIndex += 1;
 	return sessIndex;
 }
-
